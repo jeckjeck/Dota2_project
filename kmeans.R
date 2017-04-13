@@ -1,20 +1,25 @@
-library(jsonlite)
 library(png)
-library(dplyr)
 library(ggplot2)
 library(grid)
 
 
 load(file="entry.Rda")
 
+
 radiant <- old[old$side=="0",]
 dire <- old[old$side=="1",]
 
-set.seed("439823")
-herocluster <- kmeans(dire[,3:4],8, nstart=25)
+set.seed("439823") ## TO be able to reproduce the same plots
+
+# column 3 and 4 are x and y cordinates for heroes. Currently trying 8 clusters (positions). 
+# nstart=25 is standard for kmeans don't ask why.
+herocluster <- kmeans(dire[,3:4],8, nstart=25) 
 herocluster$cluster <- as.factor(herocluster$cluster)
 
-minimap <- readPNG("C:/Users/jeckz/Downloads/minimap2.png")
+
+## ggplot background
+
+minimap <- readPNG("minimap2.png")
 
 myplot2 <- ggplot(dire, aes(x = hero_cellx, y = hero_celly, color=herocluster$cluster)) +
   annotation_custom(rasterGrob(minimap,
