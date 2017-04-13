@@ -21,7 +21,7 @@ herocluster$cluster <- as.factor(herocluster$cluster)
 
 minimap <- readPNG("minimap2.png")
 
-myplot2 <- ggplot(dire, aes(x = hero_cellx, y = hero_celly, color=herocluster$cluster)) +
+myplot <- ggplot(dire, aes(x = hero_cellx, y = hero_celly, color=herocluster$cluster)) +
   annotation_custom(rasterGrob(minimap,
                                width = unit(1, "npc"),
                                height = unit(1, "npc")), 
@@ -31,5 +31,5 @@ myplot2 <- ggplot(dire, aes(x = hero_cellx, y = hero_celly, color=herocluster$cl
   scale_x_continuous(limits = c(68, 186)) +
   coord_cartesian(xlim = c(70, 183), ylim = c(63, 190))
 
-myplot2
+myplot
 
